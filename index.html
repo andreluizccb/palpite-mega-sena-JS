@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mega da Sorte</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		body{
+			background-color: #F5DEB3;
+		}
+		#content{
+			max-width: 300px;
+			width: 100%;
+			height: 500px;
+			display: grid;
+			justify-content: center;
+			margin: 0 auto;
+			background-color: #fff;
+			padding: 20px;
+			margin-top: 20px;
+			box-shadow: 3px 3px 25px #cecece;
+			border-radius: 3px;
+		}
+		.box{
+			font-family: "Trebuchet MS";
+			color: #000;
+			font-weight: 900;
+			line-height: 25px;
+			letter-spacing: .5px;
+			text-align: center;
+		}
+		.palpite{
+			margin-bottom: 10px;
+		}
+		.button{
+			max-width: 200px;
+			width: 100%;
+			height: 40px;
+			margin: 10px 0px;
+			font-weight: 900;
+			background-color: green;
+			border-radius: 50px;
+			border:none;
+			margin: 0px auto;
+		}
+		.button:hover{
+			width: 210px;
+			height: 43px;
+			cursor: pointer;
+			background-color: green;
+			color: #fff;
+			border:none;
+			border-radius: 50px;
+			opacity: .8;
+			margin: 0 auto;
+			transition: .5s;
+		}
+		footer{
+			width: 100%;
+			height: 60px;
+			background-color: green;
+			position: fixed;
+			bottom: 0px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		footer p{
+			font-family: "Trebuchet MS";
+			color: #F5DEB3;
+		}
+		footer p a{
+			text-decoration: none;
+			color: #fff;
+			font-family: "Trebuchet MS";
+		}
+	</style>
+</head>
+<body>
+	<div id="content">
+		<div id="palpite">
+			<header>
+				<img src="https://i.imgur.com/B2F6D6n.png" alt="Logo Mega sena">
+			</header>
+			<div class="palpite">
+			
+			</div>
+		</div>
+		<button class="button">Novo Palpite</button>
+    </div>
+	<script>
+		function remove(){
+			let rm = document.querySelector(".palpite");
+			let divs = rm.querySelectorAll('.box').forEach((box)=>{
+				rm.removeChild(box);
+			})
+		}
+		function mega(){
+			remove();
+			let y = 1;
+			while(y<11){
+				let x = 0;
+				let game = [];
+				while(x<6){
+					let number = Math.floor((Math.random()*60))+1;
+					if(number<10){
+						let result = game.push("0"+number);
+					}
+					x++;
+				}
+				let _game = [... new Set(game)];
+				if(_game.length == 6){
+					let sorte =`Palpite : ${game[0]}-${game[1]}-${game[2]}-${game[3]}-${game[4]}-${game[5]}`;
+					//let tela = document.querySelector(".palpite");
+					let new_elem = document.createElement('div');
+					new_elem.classList.add("box");
+					new_elem.textContent = sorte;
+					document.querySelector('.palpite').appendChild(new_elem);
+			y++;
+				}				
+			}	
+		}
+		var btn =  document.querySelector(".button");
+		btn.addEventListener("click",(e)=>{
+		mega(); 
+		})
+		mega();
+	</script>
+	<footer>
+		<p>Projeto Jogo MegaSena <a href="https://github.com/AndreCCB/palpite-MegaSena"> GitHub</a></p>
+	</footer>
+</body>
+</html>
